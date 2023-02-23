@@ -8,16 +8,19 @@ use App\Http\Controllers\authController;
 
 //public
 Route::post('/register',[authController::class,'register']);
+Route::post('/login',[authController::class,'login']);
 Route::get('/product',[test_app::class,'index']);
 Route::get('/product/{id}',[test_app::class,'show']);
 Route::get('/product/search/{name}',[test_app::class,'search']);
 
 
-//private
+//protected
 Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::post('/product',[test_app::class,'store']);
     Route::put('/product/{id}',[test_app::class,'update']);
     Route::delete('/product/{id}',[test_app::class,'destroy']);
+    Route::post('/logout',[authController::class,'logout']);
+
 
 
 });
